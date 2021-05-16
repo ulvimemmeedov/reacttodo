@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from "react";
+import DoCards from "./components/DoCards";
+export default class App extends Component {
+  state = {
+    task: [],
+  }; 
+  add =  (e) => {
+    const dodata = e.target.elements.addtodo.value;
+    if (dodata.lenght > 0) {
+      this.setState({
+        task:[...this.task, dodata]
+      })
+      e.target.reset();
+      console.log(this.state.task);
+    }
+  };
+  render() {
+    return (
+      <div class=" bg-blue w-full p-8 flex justify-center font-sans">
+        <div className="row-start-3">
+          <DoCards add={this.add} task={this.state.task} />
+        </div>
+      </div>
+    );
+  }
 }
-
-export default App;
